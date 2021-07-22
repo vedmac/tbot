@@ -1,5 +1,5 @@
-from bs4 import BeautifulSoup
 import requests
+from bs4 import BeautifulSoup
 
 # http://www.networkinghowtos.com/howto/common-user-agent-list/
 HEADERS = ({'User-Agent':

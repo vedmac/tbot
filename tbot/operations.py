@@ -1,7 +1,8 @@
 import os
+
+import scraper as amz
 import telegram
 from dotenv import load_dotenv
-import scraper as amz
 from models import Product
 
 load_dotenv()
@@ -80,7 +81,7 @@ def get_all_products():
     """
     products = Product.select()
     for product in products:
-        text = f"{product.id} - {product.title} - {product.price} - {product.availability}" # noqa
+        text = f"{product.id} - {product.title} - {product.price} - {product.availability}"  # noqa
         print(text)
         # BOT.send_message(chat_id=CHAT_ID, text=text)
 
@@ -93,10 +94,10 @@ def check_update():
         title, price, availability = get_amazone_data(product.url_field)
         if product.availability != availability:
             update_product(product.url_field)
-            BOT.send_message(chat_id=CHAT_ID, text=f"Availability {product.title} updated to {availability}") # noqa
+            BOT.send_message(chat_id=CHAT_ID, text=f"Availability {product.title} updated to {availability}")  # noqa
         elif product.price != price:
             update_product(product.url_field)
-            BOT.send_message(chat_id=CHAT_ID, text=f"Price {product.title} updated to {price}") # noqa
+            BOT.send_message(chat_id=CHAT_ID, text=f"Price {product.title} updated to {price}")  # noqa
         elif product.title != title:
             update_product(product.url_field)
             BOT.send_message(chat_id=CHAT_ID, text=f"Title updated to {title}")

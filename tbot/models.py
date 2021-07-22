@@ -1,7 +1,5 @@
-from peewee import SqliteDatabase, Model
-from peewee import CharField, PrimaryKeyField
-from peewee import InternalError
-
+from peewee import (CharField, InternalError, Model, PrimaryKeyField,
+                    SqliteDatabase)
 
 db = SqliteDatabase('products.db')
 
