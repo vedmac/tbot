@@ -1,0 +1,24 @@
+[tool.poetry]
+name = "tbot"
+version = "0.1.0"
+description = ""
+authors = ["Viktor Ermolov <viktor@ermolov.dev>"]
+readme = 'README.md'
+
+[tool.poetry.dependencies]
+python = "^3.9"
+python-telegram-bot = "^13.7"
+requests = "^2.26.0"
+python-dotenv = "^0.18.0"
+beautifulsoup4 = "^4.9.3"
+lxml = "^4.6.3"
+peewee = "^3.14.4"
+
+[tool.poetry.dev-dependencies]
+pytest = "^5.2"
+flake8 = "^3.9.2"
+autopep8 = "^1.5.7"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
