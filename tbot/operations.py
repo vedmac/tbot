@@ -24,7 +24,7 @@ def get_amazone_data(url):
     return title, price, availability
 
 
-def create_product(url):
+def add_product(url):
     """
     Create a product in the database.
     """
@@ -41,23 +41,24 @@ def create_product(url):
             url_field=url,
         )
         product.save()
-        print(f"Product created: {title}")
+        print(f"Product added: {title}")
 
 
-def update_product(url):
+def update_product(id):
     """
     Update a product in the database.
     """
-    exists = Product.select().where(Product.url_field == url)
+    exists = Product.select().where(Product.id == id)
     if bool(exists):
-        product = Product.get(Product.url_field == url)
+        product = Product.get(Product.id == id)
         product.title, product.price, product.availability = get_amazone_data(
-            url)
+            product.url_field)
         product.save()
         # print(f"Product updated: {product.title}")
         BOT.send_message(chat_id=CHAT_ID, text=f"{product.title} updated")
     else:
-        create_product(url)
+        print(f"Product doesn't exist: {id}")
+        BOT.send_message(chat_id=CHAT_ID, text=f"{id} doesn't exist")
 
 
 def remove_product(id):
@@ -83,7 +84,7 @@ def get_all_products():
     for product in products:
         text = f"{product.id} - {product.title} - {product.price} - {product.availability}"  # noqa
         print(text)
-        # BOT.send_message(chat_id=CHAT_ID, text=text)
+        BOT.send_message(chat_id=CHAT_ID, text=text)
 
 
 def check_update():
