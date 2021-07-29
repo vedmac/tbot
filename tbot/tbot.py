@@ -3,12 +3,11 @@ import os
 
 import telegram
 from dotenv import load_dotenv
-from telegram.ext import Updater, CommandHandler
-from operations import add_product, check_update, get_all_products, remove_product
+from operations import (add_product, check_update, get_all_products,
+                        remove_product)
+from telegram.ext import CommandHandler, Updater
 
-
-
-logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
+logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',  # noqa
                     level=logging.INFO)
 
 load_dotenv()
@@ -33,25 +32,31 @@ def get_all(update, context):
     """
     context.bot.send_message(chat_id=CHAT_ID, text="Все товары:")
     get_all_products()
-    
+
 
 def add(update, context):
     if context.args:
         url = context.args[0]
         add_product(url)
     else:
-        context.bot.send_message(chat_id=update.effective_chat.id, 
-                                text='No command url')
-        context.bot.send_message(chat_id=update.effective_chat.id, 
-                                text='send: /add url')
+        context.bot.send_message(chat_id=update.effective_chat.id,
+                                 text='No command url')
+        context.bot.send_message(chat_id=update.effective_chat.id,
+                                 text='send: /add url')
 
 
 def remove(update, context):
     if context.args:
         id = context.args[0]
         remove_product(id)
-    
 
+
+def check(update, context):
+    check_update()
+
+
+check_handler = CommandHandler('check', check)
+dispatcher.add_handler(check_handler)
 remove_handler = CommandHandler('remove', remove)
 dispatcher.add_handler(remove_handler)
 add_handler = CommandHandler('add', add)
