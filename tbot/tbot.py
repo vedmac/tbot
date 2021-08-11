@@ -64,7 +64,9 @@ dispatcher.add_handler(add_handler)
 get_all_handler = CommandHandler('get_all', get_all)
 dispatcher.add_handler(get_all_handler)
 
-# запуск прослушивания сообщений
-updater.start_polling()
-# обработчик нажатия Ctrl+C
-updater.idle()
+
+def start():
+    # запуск прослушивания сообщений
+    updater.start_polling()
+    # обработчик нажатия Ctrl+C
+    updater.idle()

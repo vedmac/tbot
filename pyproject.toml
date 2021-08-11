@@ -4,6 +4,9 @@ version = "0.1.0"
 description = ""
 authors = ["Viktor Ermolov <viktor@ermolov.dev>"]
 readme = 'README.md'
+packages = [
+    { include = "tbot/*.py" },
+]
 
 [tool.poetry.dependencies]
 python = "^3.9"
@@ -19,6 +22,9 @@ pytest = "^5.2"
 flake8 = "^3.9.2"
 autopep8 = "^1.5.7"
 isort = "^5.9.2"
+
+[tool.poetry.scripts]
+main = "tbot.tbot:start"
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]
