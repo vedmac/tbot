@@ -1,4 +1,5 @@
 import os
+import time
 
 import scraper as amz
 import telegram
@@ -104,7 +105,7 @@ def check_update():
             BOT.send_message(chat_id=CHAT_ID, text=f"Title updated to {title}")
         else:
             BOT.send_message(chat_id=CHAT_ID, text="Nothing new")
-
+        time.sleep(30)
 
 if __name__ == "__main__":
     # new_product = get_amazone_data(URL)
