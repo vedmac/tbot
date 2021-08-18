@@ -107,6 +107,7 @@ def check_update():
             BOT.send_message(chat_id=CHAT_ID, text="Nothing new")
         time.sleep(30)
 
+
 if __name__ == "__main__":
     # new_product = get_amazone_data(URL)
     get_all_products()
