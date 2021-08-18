@@ -57,10 +57,10 @@ def check(update, context):
 
 
 def updeter(update, context):
-    while context.args[0] != 'stop':
+    while True:
         check_update()
         sleep(24 * 60 * 60)
-    context.bot.send_message(chat_id=CHAT_ID, text="Autoupdater stopped")
+
 
 updater_handler = CommandHandler('updater', updeter)
 dispatcher.add_handler(updater_handler)
