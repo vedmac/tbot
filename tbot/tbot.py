@@ -1,5 +1,6 @@
 import logging
 import os
+from time import sleep
 
 import telegram
 from dotenv import load_dotenv
@@ -55,6 +56,14 @@ def check(update, context):
     check_update()
 
 
+def updeter(update, context):
+    while context.args[0] != 'stop':
+        check_update()
+        sleep(24 * 60 * 60)
+
+
+updater_handler = CommandHandler('updater', updeter)
+dispatcher.add_handler(updater_handler)
 check_handler = CommandHandler('check', check)
 dispatcher.add_handler(check_handler)
 remove_handler = CommandHandler('remove', remove)
