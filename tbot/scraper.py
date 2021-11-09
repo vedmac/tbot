@@ -46,7 +46,7 @@ def get_price(soup):
 
     try:
         price = soup.find(
-            "span", attrs={'id': 'priceblock_ourprice'}).string.strip()
+            "span", attrs={'class': 'a-offscreen'}).string.strip()
 
     except AttributeError:
         price = ""
@@ -125,10 +125,10 @@ if __name__ == '__main__':
     soup = get_soup(URL)
 
     # Function calls to display all necessary product information
-    print("Product Title =", get_title(soup))
+    # print("Product Title =", get_title(soup))
     print("Product Price =", get_price(soup))
-    print("Product Rating =", get_rating(soup))
-    print("Number of Product Reviews =", get_review_count(soup))
-    print("Availability =", get_availability(soup))
-    print()
+    # print("Product Rating =", get_rating(soup))
+    # print("Number of Product Reviews =", get_review_count(soup))
+    # print("Availability =", get_availability(soup))
+    # print()
     print()
