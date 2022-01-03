@@ -6,9 +6,7 @@ ENV PYTHONUNBUFFERED 1
 WORKDIR /usr/src/app
 COPY /. .
 
-RUN apt update -y \
-	&& apt-get autoremove -y && apt-get autoclean -y \
-    && pip install poetry \
+RUN pip install poetry \
     && poetry config virtualenvs.create false && poetry install --no-dev
 
 CMD poetry run main 
