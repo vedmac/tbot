@@ -2,7 +2,6 @@
 .cache
 .venv
 products.db
-README.md
 .gitignore
 .dockerignore
 LICENSE
