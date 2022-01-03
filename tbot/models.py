@@ -1,7 +1,21 @@
-from peewee import (CharField, InternalError, Model, PrimaryKeyField,
-                    SqliteDatabase)
+import os
 
-db = SqliteDatabase('products.db')
+from dotenv import load_dotenv
+from peewee import (CharField, InternalError, Model, PostgresqlDatabase,
+                    PrimaryKeyField)
+
+load_dotenv()
+
+
+SERVER = os.getenv('POSTGRES_SERVER')
+PORT = os.getenv('POSTGRES_PORT')
+USER = os.getenv('POSTGRES_USER')
+PASSWORD = os.getenv('POSTGRES_PASSWORD')
+DB = os.getenv('POSTGRES_DB')
+
+
+db = PostgresqlDatabase(DB, user=USER, password=PASSWORD,
+                        host=SERVER, port=PORT)
 
 
 class Product(Model):
@@ -18,6 +32,6 @@ class Product(Model):
 
 try:
     db.connect()
-    Product.create_table()
+    db.create_tables([Product])
 except InternalError as px:
     print(str(px))
