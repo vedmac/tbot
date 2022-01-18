@@ -17,6 +17,7 @@ beautifulsoup4 = "^4.9.3"
 lxml = "^4.6.3"
 peewee = "^3.14.4"
 psycopg2 = "^2.9.3"
+aiogram = "^2.18"
 
 [tool.poetry.dev-dependencies]
 pytest = "^5.2"
