@@ -98,8 +98,8 @@ def check_update():
             update_product(product.id)
             BOT.send_message(chat_id=CHAT_ID, text=f"Availability {product.title} updated to {availability}")  # noqa
         elif product.price != price:
+            BOT.send_message(chat_id=CHAT_ID, text=f"Price {product.title} updated from {product.price} to {price}")  # noqa
             update_product(product.id)
-            BOT.send_message(chat_id=CHAT_ID, text=f"Price {product.title} updated to {price}")  # noqa
         elif product.title != title:
             update_product(product.id)
             BOT.send_message(chat_id=CHAT_ID, text=f"Title updated to {title}")
