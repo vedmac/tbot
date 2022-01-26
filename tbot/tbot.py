@@ -7,6 +7,8 @@ from operations import (add_product, check_update, get_all_products,
                         remove_product)
 from telegram.ext import CommandHandler, Updater
 
+from aiogram import Bot, Dispatcher, executor, types
+
 logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',  # noqa
                     level=logging.INFO)
 
@@ -21,6 +23,12 @@ CHAT_ID = os.getenv("TELEGRAM_CHAT_ID")
 updater = Updater(token=TELEGRAM_TOKEN, use_context=True)
 # получаем экземпляр `Dispatcher`
 dispatcher = updater.dispatcher
+
+if not TELEGRAM_TOKEN:
+    exit("Error: no token provided")
+
+bot = Bot(token=TELEGRAM_TOKEN)
+dp = Dispatcher(bot)
 
 
 def get_all(update, context):
