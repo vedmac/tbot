@@ -42,7 +42,7 @@ def add_product(url):
             url_field=url,
         )
         product.save()
-        print(f"Product added: {title}")
+        return f"Product added: {title}"
 
 
 def update_product(id):
@@ -73,7 +73,7 @@ def remove_product(id):
         # print(f"Product deleted: {product.title}")
         BOT.send_message(chat_id=CHAT_ID, text=f"{product.title} deleted")
     else:
-        print(f"Product doesn't exist: {id}")
+        # print(f"Product doesn't exist: {id}")
         BOT.send_message(chat_id=CHAT_ID, text=f"{id} doesn't exist")
 
 
@@ -82,10 +82,7 @@ def get_all_products():
     Get all products from the database.
     """
     products = Product.select()
-    for product in products:
-        text = f"{product.id} - {product.title} - {product.price} - {product.availability}"  # noqa
-        print(text)
-        BOT.send_message(chat_id=CHAT_ID, text=text)
+    return products
 
 
 def check_update():
