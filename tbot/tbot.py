@@ -39,18 +39,12 @@ async def cmd_check(message: types.Message):
     products = get_all_products()
     for product in products:
         title, price, availability = get_amazone_data(product.url_field)
-        if product.availability != availability:
+        if product.availability != availability or product.price != price or product.title != title:  # noqa
+            await message.answer(f"Product {product.title} - {product.price} - {product.availability} updated to {title} - {price} - {availability}")  # noqa
             update_product(product.id)
-            await message.answer(f"Availability {product.title} updated to {availability}")  # noqa
-        elif product.price != price:
-            await message.answer(f"Price {product.title} updated from {product.price} to {price}")  # noqa
-            update_product(product.id)
-        elif product.title != title:
-            update_product(product.id)
-            await message.answer(f"Title updated to {title}")
         else:
             await message.answer("Nothing new")
-        time.sleep(30)
+        time.sleep(15)
 
 
 @dp.message_handler(commands="add")

@@ -56,10 +56,10 @@ def update_product(id):
             product.url_field)
         product.save()
         # print(f"Product updated: {product.title}")
-        BOT.send_message(chat_id=CHAT_ID, text=f"{product.title} updated")
-    else:
-        print(f"Product doesn't exist: {id}")
-        BOT.send_message(chat_id=CHAT_ID, text=f"{id} doesn't exist")
+        # BOT.send_message(chat_id=CHAT_ID, text=f"{product.title} updated")
+    # else:
+    #     print(f"Product doesn't exist: {id}")
+        # BOT.send_message(chat_id=CHAT_ID, text=f"{id} doesn't exist")
 
 
 def remove_product(id):
