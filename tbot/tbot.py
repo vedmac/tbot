@@ -61,8 +61,8 @@ async def cmd_add(message: types.Message):
 async def cmd_remove(message: types.Message):
     if message.get_args():
         id = message.get_args()
-        remove_product(id)
-        await message.answer(f"Удален товар {id}")
+        text = remove_product(id)
+        await message.answer(text)
     else:
         await message.answer("Не указан id")
 

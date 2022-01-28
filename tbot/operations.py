@@ -32,7 +32,7 @@ def add_product(url):
     exists = Product.select().where(Product.url_field == url)
     if bool(exists):
         product = Product.get(Product.url_field == url)
-        print(f"Product already exists: {product.title}")
+        return f"Product already exists: {product.title}"
     else:
         title, price, availability = get_amazone_data(url)
         product = Product.create(
@@ -71,10 +71,10 @@ def remove_product(id):
         product = Product.get(Product.id == id)
         product.delete_instance()
         # print(f"Product deleted: {product.title}")
-        BOT.send_message(chat_id=CHAT_ID, text=f"{product.title} deleted")
+        return f"{product.title} удален"
     else:
         # print(f"Product doesn't exist: {id}")
-        BOT.send_message(chat_id=CHAT_ID, text=f"{id} doesn't exist")
+        return f"{id} такого товара нет"
 
 
 def get_all_products():
@@ -91,18 +91,25 @@ def check_update():
     """
     for product in Product.select():
         title, price, availability = get_amazone_data(product.url_field)
-        if product.availability != availability:
+        if product.availability != availability or product.price != price or product.title != title:  # noqa
+            BOT.send_message(chat_id=CHAT_ID, text=f"Product {product.title} - {product.price} - {product.availability} updated to {title} - {price} - {availability}")  # noqa
             update_product(product.id)
-            BOT.send_message(chat_id=CHAT_ID, text=f"Availability {product.title} updated to {availability}")  # noqa
-        elif product.price != price:
-            BOT.send_message(chat_id=CHAT_ID, text=f"Price {product.title} updated from {product.price} to {price}")  # noqa
-            update_product(product.id)
-        elif product.title != title:
-            update_product(product.id)
-            BOT.send_message(chat_id=CHAT_ID, text=f"Title updated to {title}")
         else:
             BOT.send_message(chat_id=CHAT_ID, text="Nothing new")
-        time.sleep(30)
+        time.sleep(15)
+
+        # if product.availability != availability:
+        #     update_product(product.id)
+        #     BOT.send_message(chat_id=CHAT_ID, text=f"Availability {product.title} updated to {availability}")  # noqa
+        # elif product.price != price:
+        #     BOT.send_message(chat_id=CHAT_ID, text=f"Price {product.title} updated from {product.price} to {price}")  # noqa
+        #     update_product(product.id)
+        # elif product.title != title:
+        #     update_product(product.id)
+        #     BOT.send_message(chat_id=CHAT_ID, text=f"Title updated to {title}")
+        # else:
+        #     BOT.send_message(chat_id=CHAT_ID, text="Nothing new")
+        # time.sleep(30)
 
 
 if __name__ == "__main__":
