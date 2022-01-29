@@ -1,17 +1,10 @@
-import os
 import time
 
 import scraper as amz
-import telegram
 from dotenv import load_dotenv
 from models import Product
 
 load_dotenv()
-
-TELEGRAM_TOKEN = os.getenv("TELEGRAM_TOKEN")
-BOT = telegram.Bot(token=TELEGRAM_TOKEN)
-CHAT_ID = os.getenv("TELEGRAM_CHAT_ID")
-URL = "https://www.amazon.com/Pampers-Training-Underwear-5t-6t-Count/dp/B01M2CZBCD/ref=sr_1_3?crid=KSTW33I9DL74&dchild=1&keywords=pampers+easy+ups+5t-6t&qid=1626787064&sprefix=pampers+ea%2Caps%2C195&sr=8-3"  # noqa
 
 
 def get_amazone_data(url):
@@ -78,15 +71,15 @@ def get_all_products():
     return products
 
 
-def check_update():
-    """
-    Check if a product is updated.
-    """
-    for product in Product.select():
-        title, price, availability = get_amazone_data(product.url_field)
-        if product.availability != availability or product.price != price or product.title != title:  # noqa
-            BOT.send_message(chat_id=CHAT_ID, text=f"Product {product.title} - {product.price} - {product.availability} updated to {title} - {price} - {availability}")  # noqa
-            update_product(product.id)
-        else:
-            BOT.send_message(chat_id=CHAT_ID, text="Nothing new")
-        time.sleep(15)
+# def check_update():
+#     """
+#     Check if a product is updated.
+#     """
+#     for product in Product.select():
+#         title, price, availability = get_amazone_data(product.url_field)
+#         if product.availability != availability or product.price != price or product.title != title:  # noqa
+#             BOT.send_message(chat_id=CHAT_ID, text=f"Product {product.title} - {product.price} - {product.availability} updated to {title} - {price} - {availability}")  # noqa
+#             update_product(product.id)
+#         else:
+#             BOT.send_message(chat_id=CHAT_ID, text="Nothing new")
+#         time.sleep(15)
