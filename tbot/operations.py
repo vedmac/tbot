@@ -1,5 +1,3 @@
-import time
-
 import scraper as amz
 from dotenv import load_dotenv
 from models import Product

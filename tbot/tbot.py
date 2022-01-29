@@ -7,7 +7,6 @@ from dotenv import load_dotenv
 from operations import (add_product, get_all_products, get_amazone_data,
                         remove_product, update_product)
 
-
 logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',  # noqa
                     level=logging.INFO)
 
