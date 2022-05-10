@@ -46,7 +46,7 @@ def get_price(soup):
 
     try:
         price = soup.find(
-            "span", attrs={'class': 'a-offscreen'}).string.strip()
+            "span", attrs={'id': 'sns-tiered-price'}).string.strip()
 
     except AttributeError:
         price = ""
