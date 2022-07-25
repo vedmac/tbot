@@ -45,8 +45,11 @@ def get_title(soup):
 def get_price(soup):
 
     try:
-        price = soup.find(
-            "span", attrs={'id': "sns-tiered-price"}).text.strip().split()[0]
+        price_whole = soup.find(
+            "span", attrs={'class': "a-price-whole"}).text.strip()
+        price_fraction = soup.find(
+            "span", attrs={'class': "a-price-fraction"}).text.strip()
+        price = price_whole + price_fraction
 
     except AttributeError:
         price = ""
