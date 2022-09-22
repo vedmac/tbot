@@ -4,7 +4,7 @@ import time
 
 from aiogram import Bot, Dispatcher, executor, types
 from dotenv import load_dotenv
-from operations import (add_product, get_all_products, get_amazone_data,
+from operations import (add_product, get_all_products, get_amazon_data,
                         remove_product, update_product)
 
 logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',  # noqa
@@ -37,7 +37,7 @@ async def cmd_get_all(message: types.Message):
 async def cmd_check(message: types.Message):
     products = get_all_products()
     for product in products:
-        title, price, availability = get_amazone_data(product.url_field)
+        title, price, availability = get_amazon_data(product.url_field)
         if product.availability != availability or product.price != price or product.title != title:  # noqa
             await message.answer(f"Product {product.title} - {product.price} - {product.availability} updated to {title} - {price} - {availability}")  # noqa
             update_product(product.id)

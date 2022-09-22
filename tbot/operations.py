@@ -5,7 +5,7 @@ from models import Product
 load_dotenv()
 
 
-def get_amazone_data(url):
+def get_amazon_data(url):
     """
     Get data from Amazon.
     """
@@ -25,7 +25,7 @@ def add_product(url):
         product = Product.get(Product.url_field == url)
         return f"Product already exists: {product.title}"
     else:
-        title, price, availability = get_amazone_data(url)
+        title, price, availability = get_amazon_data(url)
         product = Product.create(
             title=title,
             price=price,
@@ -43,7 +43,7 @@ def update_product(id):
     exists = Product.select().where(Product.id == id)
     if bool(exists):
         product = Product.get(Product.id == id)
-        product.title, product.price, product.availability = get_amazone_data(
+        product.title, product.price, product.availability = get_amazon_data(
             product.url_field)
         product.save()
 
@@ -74,7 +74,7 @@ def get_all_products():
 #     Check if a product is updated.
 #     """
 #     for product in Product.select():
-#         title, price, availability = get_amazone_data(product.url_field)
+#         title, price, availability = get_amazon_data(product.url_field)
 #         if product.availability != availability or product.price != price or product.title != title:  # noqa
 #             BOT.send_message(chat_id=CHAT_ID, text=f"Product {product.title} - {product.price} - {product.availability} updated to {title} - {price} - {availability}")  # noqa
 #             update_product(product.id)
